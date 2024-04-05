@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        GIT_URL = 'https://github.com/OlexiyLavreshyn/kubernetes.git'
+        GIT_URL = 'https://github.com/DianaLupi/cicd.git'
         GIT_BRANCH = 'main'
-        GIT_USER_EMAIL = 'alexxxx44442@gmail.com'
-        GIT_USER_NAME = 'OlexiyLavreshyn'
-        GIT_CREDENTIALS_ID = 'gitToken2'
+        GIT_USER_EMAIL = 'dlupij2005@gmail.com'
+        GIT_USER_NAME = 'DianaLupi'
+        GIT_CREDENTIALS_ID = 'gitToken'
     }
 
     stages {
