@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+  minikube:
+    image: minikube/minikube
+    privileged: true
+    ports:
+      - "8443:8443"
+    volumes:
+      - minikube_data:/data
+
+volumes:
+  jenkins_home:
+  minikube_data:
