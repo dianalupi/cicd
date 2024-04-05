@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_URL = 'https://github.com/OlexiyLavreshyn/kubernetes.git'
+        GIT_BRANCH = 'main'
+        GIT_USER_EMAIL = 'alexxxx44442@gmail.com'
+        GIT_USER_NAME = 'OlexiyLavreshyn'
+        GIT_CREDENTIALS_ID = 'gitToken2'
+    }
+
+    stages {
+        stage('Clone Git Repository') {
+            steps {
+                script {
+                    git branch: GIT_BRANCH, credentialsId: GIT_CREDENTIALS_ID, url: GIT_URL
+                }
+            }
+        }
+
+        stage('Update index.html') {
+            steps {
+                script {
+                    sh 'echo "<html><body><h1>Updated Content</h1></body></html>" > index.html'
+                    sh 'echo "<html><body><h1>New Content</h1></body></html>" > index2.html' // Create new file
+                    sh 'git add index.html index2.html' // Add both files to the staging area
+                    sh "git -c user.email='${GIT_USER_EMAIL}' -c user.name='${GIT_USER_NAME}' commit -m 'Update index.html and add index2.html'"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
